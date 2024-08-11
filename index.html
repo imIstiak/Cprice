@@ -1,0 +1,36 @@
+<!-- HTML -->
+<form>
+    <label for="chinaProductPrice">China Product Price (RMB):</label>
+    <input type="number" id="chinaProductPrice" name="chinaProductPrice"><br><br>
+    <label for="productWeight">Product Weight (kg):</label>
+    <input type="number" id="productWeight" name="productWeight" step="0.1"><br><br>
+    <label for="weightCostPerKg">Weight Cost per kg (TK):</label>
+    <input type="number" id="weightCostPerKg" name="weightCostPerKg" step="0.1"><br><br>
+    <input type="submit" value="Calculate" id="calculate-btn">
+  </form>
+  
+  <div id="result"></div>
+  
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <!-- JavaScript -->
+  <script>
+    const conversionRate = 18; // 1 RMB = 18 TK
+    const commission = 0.2; // 20% commission (fixed)
+  
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const chinaProductPrice = document.querySelector('#chinaProductPrice').value;
+      const productWeight = document.querySelector('#productWeight').value;
+      const weightCostPerKg = document.querySelector('#weightCostPerKg').value;
+  
+      const x = chinaProductPrice * conversionRate * (1 + commission);
+      const y = productWeight * weightCostPerKg;
+      const z = x + y;
+  
+      const resultElement = document.querySelector('#result');
+      resultElement.innerHTML = `Total Price in TK: ${z.toFixed(2)}`;
+    });
+  </script>
